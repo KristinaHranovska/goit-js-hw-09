@@ -1,3 +1,8 @@
+// Описаний в документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const galleryItems = [
     {
         preview:
@@ -66,15 +71,12 @@ const galleryItems = [
 
 const gallery = document.querySelector('.gallery');
 
-// gallery.addEventListener('click', onClickOpenImg);
-
 const imgItems = galleryItems.map(({ preview, original, description }) =>
     ` <li class="gallery-item">
         <a class="gallery-link" href="${original}">
             <img
                 class="gallery-image"
                 src="${preview}"
-                data-source="${original}"
                 alt="${description}"
                 width='360'
             />
@@ -83,3 +85,9 @@ const imgItems = galleryItems.map(({ preview, original, description }) =>
 ).join('');
 
 gallery.insertAdjacentHTML('beforeend', imgItems);
+
+new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionsData: 'alt',
+    captionDelay: 250,
+});
